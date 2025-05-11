@@ -41,11 +41,14 @@ def eval_mesh(file_pred, file_trgt, down_sample_res=0.02, threshold=0.05, trunca
         Dict of mesh metrics (chamfer distance, precision, recall, f1 score, etc.)
     """
 
+    # 加载预测网格 角点 面
     mesh_pred = o3d.io.read_triangle_mesh(file_pred)
 
+    # 加载真实点云
     pcd_trgt = o3d.io.read_point_cloud(file_trgt)
 
     # (optional) filter the prediction outside the gt bounding box (since gt sometimes is not complete enough)
+    # 裁剪预测网格到真实点云的包围盒
     if gt_bbx_mask_on: 
         trgt_bbx = pcd_trgt.get_axis_aligned_bounding_box()
         min_bound = trgt_bbx.get_min_bound()
@@ -58,6 +61,7 @@ def eval_mesh(file_pred, file_trgt, down_sample_res=0.02, threshold=0.05, trunca
 
     # pcd_sample_pred = mesh_pred.sample_points_poisson_disk(number_of_points=mesh_sample_point, init_factor=possion_sample_init_factor)
     # mesh uniform sampling
+    # 网格均匀采样 1000w个点，转为点云
     pcd_sample_pred = mesh_pred.sample_points_uniformly(number_of_points=mesh_sample_point)
 
     if down_sample_res > 0:

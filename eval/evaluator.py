@@ -46,8 +46,11 @@ output_csv_path = base_output_folder + dataset_name + method_name + "_eval.csv"
 # For MaiCity
 # 体素下采样分别率
 down_sample_vox = 0.02
+# 距离阈值 用于计算 回召率
 dist_thre = 0.1
+# 截断预测点到真实点的最大距离
 truncation_dist_acc = 0.2 
+# 截断真实点到预测点的最大距离
 truncation_dist_com = 2.0
 
 # For NCD
@@ -57,6 +60,7 @@ truncation_dist_com = 2.0
 # truncation_dist_com = 2.0
 
 # evaluation
+# gt_bbx_mask_on 	是否将预测网格裁剪到真实点云的包围盒内
 eval_metric = eval_mesh(pred_mesh_path, gt_pcd_path, down_sample_res=down_sample_vox, threshold=dist_thre, 
                         truncation_acc = truncation_dist_acc, truncation_com = truncation_dist_com, gt_bbx_mask_on = True) 
 
