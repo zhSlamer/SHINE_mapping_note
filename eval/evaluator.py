@@ -44,6 +44,7 @@ output_csv_path = base_output_folder + dataset_name + method_name + "_eval.csv"
 
 # evaluation parameters
 # For MaiCity
+# 体素下采样分别率
 down_sample_vox = 0.02
 dist_thre = 0.1
 truncation_dist_acc = 0.2 
